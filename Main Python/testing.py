@@ -1,4 +1,4 @@
-def main(key):
-    print(key)
+def main(x):
+    print(x)
     
-main(x=input("Enter: "))
+main(x='hello everyone')
