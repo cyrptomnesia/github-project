@@ -17,27 +17,21 @@ def requestStatusCode(findWeb):
     
     r = requests.get(findWeb)
     
-    try:
+    if r.status_code == 200:
+        print(f'website, {addition} -> {r.status_code}, [{web_to_ip}]\nVALID!\n')
         
-        if r.status_code == 200:
-            print(f'Valid connection, [{web_to_ip}]')
-    
-    except Exception as e:
-        print(f'Invalid, [{r.status_code}]')
-        
+    else:
+        print(f'Status code invalid [{r.status_code}]')
             # status code end
 
 
 
 def inspectWeb(website):
     
-    try:
-        r = requests.get(website)
-        
-        print(r.text)                   # like inspect element
+  
+    r = requests.get(website)
     
-    except Exception as e:
-        print(f'[ERROR] -> {e}')
+    print(r.text)                   # like inspect element
 
 
 
@@ -53,5 +47,17 @@ print('Ping ended!\n')
 
 userDir = input("Enter valid url pathway: ")
 
-requestStatusCode(findWeb=f'{https+web_user+userDir}')     # users dir here
-inspectWeb(website=f'{https+web_user+userDir}')
+addition = https+web_user+userDir
+
+requestStatusCode(findWeb=addition)     # users dir here
+
+see = input("Inspect web? y/n: ")
+
+if see == 'Y'.lower():
+    inspectWeb(website=addition)
+    
+elif see == 'N'.lower():
+    print('Exiting...')
+    
+else:
+    print(f'{see} is not a valid input!')
