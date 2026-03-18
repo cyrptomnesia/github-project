@@ -11,6 +11,9 @@ input_websiteIP = input("Enter a website dns: ")
 webIP = socket.gethostbyname(input_websiteIP)
 
 
+# -- seperate ping data
+os.system(f'ping {webIP} > {mainCachePath}\\pingText.txt')
+
 
 print(f'initial web, [{input_websiteIP}] -> ip [{webIP}]')
 
@@ -35,13 +38,13 @@ def reqFindValidConnection(reqIP):
         quit()
 
 
-def ezPing():
-    
-    os.system(f'ping {webIP} > {mainCachePath}\\writeME.txt')
-
 
 # -- storing data
 with open(f'{mainCachePath}\\writeME.txt','w') as f:
     
-    f.write(f"web [{input_websiteIP}] -> ip, [{webIP}]\nStatus code -> {reqFindValidConnection(reqIP=https+input_websiteIP)}\n")
+    f.write(
+f""" 
+web [{input_websiteIP}] -> ip, [{webIP}]\n
+Status code -> {reqFindValidConnection(reqIP=https+input_websiteIP)}
+""")
     f.close()
